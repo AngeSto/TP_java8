@@ -4,6 +4,7 @@ import java8.data.Account;
 import java8.data.Person;
 import org.junit.Test;
 
+import java.security.acl.Owner;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.*;
@@ -46,6 +47,8 @@ public class Optional_03_Test {
         // TODO A l'aide de la méthode map récupérer le prénom (account -> person -> firstname)
         // TODO Utiliser la méthode orElseThrow pour déclencher l'exception GoodException si non trouvé
         // accOpt.map...
+        Optional <String> accountname = accOpt.map(fname -> account.getOwner().getFirstname());
+        accountname.orElseThrow(() -> new GoodException());
     }
 
     @Test(expected = GoodException.class)
@@ -55,6 +58,8 @@ public class Optional_03_Test {
         // TODO A l'aide de la méthode map récupérer le prénom (account -> person -> firstname)
         // TODO Utiliser la méthode orElseThrow pour déclencher l'exception GoodException si non trouvé
         // accOpt.map...
+        Optional <String> accountname = accOpt.map(owner -> account.getOwner()).map(fname -> fname.getFirstname());
+        accountname.orElseThrow(() -> new GoodException());
     }
 
     @Test(expected = GoodException.class)
@@ -64,6 +69,8 @@ public class Optional_03_Test {
         // TODO A l'aide de la méthode map récupérer le prénom (account -> person -> firstname)
         // TODO Utiliser la méthode orElseThrow pour déclencher l'exception GoodException si non trouvé
         // accOpt.map...
+        Optional <String> accountname = accOpt.map(fname -> account.getOwner().getFirstname());
+        accountname.orElseThrow(() -> new GoodException());
     }
 
     @Test
@@ -73,5 +80,10 @@ public class Optional_03_Test {
         // TODO A l'aide de la méthode map récupérer le prénom (account -> person -> firstname)
         // TODO Utiliser la méthode ifPresent pour valider que le prénom est "A"
         // accOpt.map...
+        Optional <String> accountname = accOpt.map(fname -> account.getOwner().getFirstname());
+        accountname.ifPresent(a -> {
+        	assert a.equals("A");
+        	
+        });
     }
 }
