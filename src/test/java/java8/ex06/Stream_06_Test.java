@@ -34,7 +34,8 @@ public class Stream_06_Test {
     // TODO utiliser la méthode Stream.iterate
     // TODO cette méthode doit produire le même résultat que imperativeSum
     private long iterateSum(long n) {
-        return 0;
+    	long resultat = Stream.iterate(0L, i -> i = i + 1L).limit(n).reduce((first, second) -> first + second).get();
+        return resultat;
     }
 
     // TODO exécuter le test pour vérifier que les méthodes imperativeSum et iterateSum produisent le même résultat
@@ -53,7 +54,8 @@ public class Stream_06_Test {
     // TODO utiliser la méthode Stream.iterate
     // TODO transformer en stream parallel (.parallel())
     private long parallelIterateSum(long n) {
-        return 0;
+    	long resultat = Stream.iterate(0L, i -> i = i +1L).parallel().reduce((first, second)->first+second).get();
+        return resultat;
     }
 
     // TODO exécuter le test pour vérifier que les méthodes imperativeSum, iterateSum et parallelIterateSum produisent le même résultat
@@ -91,9 +93,9 @@ public class Stream_06_Test {
     // TODO visualiser les temps d'exécution
     @Test
     public void monitor_imperativeSum_vs_iterateSum_vs_parallelIterateSum() {
-        Logger.getAnonymousLogger().info("imperativeSum => " + /* TODO */" ms");
-        Logger.getAnonymousLogger().info("iterateSum => " + /* TODO */" ms");
-        Logger.getAnonymousLogger().info("parallelIterateSum => " + /* TODO */ " ms");
+        Logger.getAnonymousLogger().info("imperativeSum => " + monitor(ms -> imperativeSum(NB), NB)+" ms");
+        Logger.getAnonymousLogger().info("iterateSum => " + monitor(ms -> iterateSum(NB), NB)+" ms");
+        Logger.getAnonymousLogger().info("parallelIterateSum => " + monitor(ms -> parallelIterateSum(NB), NB)+ " ms");
     }
 
     // Quel résultat obtenez-vous ?
@@ -107,7 +109,8 @@ public class Stream_06_Test {
     // TODO compléter la méthode rangeSum
     // TODO utiliser la méthode LongStream.rangeClosed
     private long rangeSum(long n) {
-        return 0;
+    	long resultat = LongStream.rangeClosed(0L, n-1).reduce((first, second) -> first + second).getAsLong();
+        return resultat;
     }
 
     // TODO vérifier que l'implémentation de rangeSum
@@ -126,7 +129,8 @@ public class Stream_06_Test {
     // TODO utiliser la méthode LongStream.rangeClosed
     // TODO transformer en stream parallel (.parallel())
     private long rangeParallelSum(long n) {
-        return 0;
+    	long resultat = LongStream.rangeClosed(0L, n - 1).parallel().reduce((first, second)->first+second).getAsLong();
+        return resultat;
     }
 
     // TODO vérifier que l'implémentation de rangeParallelSum
